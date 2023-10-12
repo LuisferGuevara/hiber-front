@@ -1,9 +1,8 @@
 import "./styles/App.scss";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import { checkSession } from "./redux/Auth/auth.functions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Modal from "react-modal";
 import AuthRoute from "./components/AuthRoute";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
@@ -11,17 +10,14 @@ import Register from "./pages/Register";
 import UserProfile from "./pages/UserProfile";
 import UsersList from "./pages/UsersList";
 
-Modal.setAppElement('#root'); // Cambia '#root' por el identificador de tu elemento raíz
-
-
 function App() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      checkSession(token, navigate, dispatch);
+      checkSession(token,  dispatch);
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
