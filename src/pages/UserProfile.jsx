@@ -10,7 +10,7 @@ const UserProfile = () => {
     <div className="main-container">
       <Navbar/>
       <h3>Mi Perfil</h3>
-      <UserCard user={user} />;
+      <UserCard user={user} />
     </div>
   );
 };

@@ -1,12 +1,21 @@
 import { API } from "../../utils/services/api";
 
 export const postUser = async (data, navigate, dispatch) => {
+  // try {
+  //   const result = await API.post("/users/register", data);
+  //   dispatch({ type: "registerUser", payload: result.data });
+  //   navigate("/");
+  // } catch (error) {
+  //   dispatch({ type: "registerError", payload: error.message });
+  // }
   try {
     const result = await API.post("/users/register", data);
     dispatch({ type: "registerUser", payload: result.data });
-    navigate("/");
+    localStorage.setItem("token", result.data.token);
+    localStorage.setItem("user", JSON.stringify(result.data.userDb));
+    // window.location.reload(); // Recarga la página
   } catch (error) {
-    dispatch({ type: "registerError", payload: error.message });
+    dispatch({ type: "registerError", payload: error.response.data });
   }
 };
 
@@ -26,7 +35,6 @@ export const logoutUser = (navigate, dispatch) => {
   try {
     dispatch({ type: "logoutUser" });
     localStorage.removeItem("token");
-    localStorage.removeItem("cart");
     navigate("/");
   } catch (error) {
     dispatch({ type: "logoutError", payload: error.message });
@@ -64,15 +72,13 @@ export const getAllUsers = () => async (dispatch) => {
 
 export const checkSession = async (token, navigate, dispatch) => {
   try {
-  const result = await API.post("users/checksession");
-  dispatch({ type: "userChecksession", payload: result.data });
-  // localStorage.setItem('user', JSON.stringify(result.data.userDb));
-  localStorage.setItem("token", token);
-  const currentPath = window.location.pathname;
-  navigate(currentPath);
-} catch (error) {
-      dispatch({ type: "userChecksessionError", payload: error.message });
-    }
-}; 
-
-
+    const result = await API.post("users/checksession");
+    dispatch({ type: "userChecksession", payload: result.data });
+    localStorage.setItem("user", JSON.stringify(result.data.userDb));
+    localStorage.setItem("token", token);
+    const currentPath = window.location.pathname;
+    navigate(currentPath);
+  } catch (error) {
+    dispatch({ type: "userChecksessionError", payload: error.message });
+  }
+};

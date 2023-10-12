@@ -26,7 +26,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
 
     putUser: { ...state, user: action.payload, error: false },
     putUserError: { ...state, error: action.payload },
-    
+
     deleteUser: {
       ...state,
       users: state.users.filter((user) => user._id !== action.payload),
@@ -46,7 +46,8 @@ const authReducer = (state = INITIAL_STATE, action) => {
       token: action.payload?.token,
       error: false,
     },
-  };  console.log("State after:", state);
+  };
+  console.log("State after:", state);
 
   return cases[action.type] || state;
 };

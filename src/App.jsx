@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import AuthRoute from "./components/AuthRoute";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
-import Register from "./pages/REgister";
+import Register from "./pages/Register";
 import UserProfile from "./pages/UserProfile";
 import UsersList from "./pages/UsersList";
 
@@ -36,6 +36,8 @@ function App() {
         <Route path="/userProfile" element={<AuthRoute component={<UserProfile />} />} />
         <Route path="/usersList" element={<AuthRoute component={<UsersList />} />} />
       </Routes>
+
+      <footer>- Developed by Luisfer Guevara -</footer>
     </div>
   );
 }
