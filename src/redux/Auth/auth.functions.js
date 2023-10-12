@@ -1,6 +1,6 @@
 import { API } from "../../utils/services/api";
 
-export const postUser = async (data, navigate, dispatch) => {
+export const postUser = async (data,  dispatch) => {
   try {
     const result = await API.post("/users/register", data);
     dispatch({ type: "registerUser", payload: result.data });
@@ -38,7 +38,7 @@ export const putUser = async (data, dispatch, id, setEdit) => {
     dispatch({ type: "putUser", payload: result.data });
     setEdit(false);
   } catch (error) {
-    dispatch({ type: "putUser", payload: error.message });
+    dispatch({ type: "putUsereError", payload: error.message });
   }
 };
 export const putUsers = async (data, dispatch, id, setEdit) => {
@@ -48,7 +48,7 @@ export const putUsers = async (data, dispatch, id, setEdit) => {
     dispatch({ type: "putUsers", payload: result.data });
     setEdit(false);
   } catch (error) {
-    dispatch({ type: "putUsers", payload: error.message });
+    dispatch({ type: "putUsersErro", payload: error.message });
   }
 };
 
@@ -70,7 +70,7 @@ export const getAllUsers = () => async (dispatch) => {
   }
 };
 
-export const checkSession = async (token, navigate, dispatch) => {
+export const checkSession = async (token, dispatch) => {
   try {
     const result = await API.post("users/checksession");
     dispatch({ type: "userChecksession", payload: result.data });

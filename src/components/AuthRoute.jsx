@@ -7,6 +7,6 @@ const AuthRoute = ({ component }) => {
 
   return component;
 };
-AuthRoute.propTypes = { component: PropTypes.object };
+AuthRoute.propTypes = { component: PropTypes.element };
 
 export default AuthRoute;

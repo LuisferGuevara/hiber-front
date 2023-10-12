@@ -23,7 +23,7 @@ const SuccessModal = ({ isOpen, closeModal }) => {
   );
 };
 SuccessModal.propTypes = {
-  isOpen: PropTypes.object,
+  isOpen: PropTypes.bool,
   closeModal: PropTypes.func,
 };
 
