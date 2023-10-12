@@ -37,7 +37,7 @@ function App() {
         <Route path="/usersList" element={<AuthRoute component={<UsersList />} />} />
       </Routes>
 
-      <footer>- Developed by Luisfer Guevara -</footer>
+      <footer>- Developed by Luisfer Guevara</footer>
     </div>
   );
 }

@@ -7,8 +7,6 @@ const INITIAL_STATE = {
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
-  console.log("Action:", action);
-  console.log("State before:", state);
   const cases = {
     loginUser: {
       ...state,
@@ -26,6 +24,9 @@ const authReducer = (state = INITIAL_STATE, action) => {
 
     putUser: { ...state, user: action.payload, error: false },
     putUserError: { ...state, error: action.payload },
+
+    putUsers: { ...state, users: action.payload, error: false },
+    putUsersError: { ...state, error: action.payload },
 
     deleteUser: {
       ...state,
@@ -47,7 +48,6 @@ const authReducer = (state = INITIAL_STATE, action) => {
       error: false,
     },
   };
-  console.log("State after:", state);
 
   return cases[action.type] || state;
 };

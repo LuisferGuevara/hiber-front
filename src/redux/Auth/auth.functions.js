@@ -1,19 +1,9 @@
 import { API } from "../../utils/services/api";
 
 export const postUser = async (data, navigate, dispatch) => {
-  // try {
-  //   const result = await API.post("/users/register", data);
-  //   dispatch({ type: "registerUser", payload: result.data });
-  //   navigate("/");
-  // } catch (error) {
-  //   dispatch({ type: "registerError", payload: error.message });
-  // }
   try {
     const result = await API.post("/users/register", data);
     dispatch({ type: "registerUser", payload: result.data });
-    localStorage.setItem("token", result.data.token);
-    localStorage.setItem("user", JSON.stringify(result.data.userDb));
-    // window.location.reload(); // Recarga la página
   } catch (error) {
     dispatch({ type: "registerError", payload: error.response.data });
   }
@@ -35,6 +25,7 @@ export const logoutUser = (navigate, dispatch) => {
   try {
     dispatch({ type: "logoutUser" });
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate("/");
   } catch (error) {
     dispatch({ type: "logoutError", payload: error.message });
@@ -50,6 +41,16 @@ export const putUser = async (data, dispatch, id, setEdit) => {
     dispatch({ type: "putUser", payload: error.message });
   }
 };
+export const putUsers = async (data, dispatch, id, setEdit) => {
+  try {
+    await API.put(`users/edit/${id}`, data);
+    const result = await API.get(`users/getAllUsers`);
+    dispatch({ type: "putUsers", payload: result.data });
+    setEdit(false);
+  } catch (error) {
+    dispatch({ type: "putUsers", payload: error.message });
+  }
+};
 
 export const deleteUser = async (id, dispatch) => {
   try {
@@ -63,7 +64,6 @@ export const deleteUser = async (id, dispatch) => {
 export const getAllUsers = () => async (dispatch) => {
   try {
     const result = await API.get(`users/getAllUsers`);
-    console.log("usuario del db:", result.data);
     dispatch({ type: "getAllUsers", payload: result.data });
   } catch (error) {
     dispatch({ type: "getAllUsersError", payload: error.message });
@@ -76,8 +76,6 @@ export const checkSession = async (token, navigate, dispatch) => {
     dispatch({ type: "userChecksession", payload: result.data });
     localStorage.setItem("user", JSON.stringify(result.data.userDb));
     localStorage.setItem("token", token);
-    const currentPath = window.location.pathname;
-    navigate(currentPath);
   } catch (error) {
     dispatch({ type: "userChecksessionError", payload: error.message });
   }

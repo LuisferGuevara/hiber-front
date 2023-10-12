@@ -34,12 +34,12 @@ const Register = () => {
       {isLoading && <h2 className="loading">Iniciando sesión</h2>}
 
       <form onSubmit={handleSubmit(registerUser)}>
-      <div className="tool-container back">
-        <NavLink to="/login">
-          <FontAwesomeIcon icon={faArrowLeft} />
-        </NavLink>
-        <div className="tooltip"> Login</div>
-      </div>
+        <div className="tool-container back">
+          <NavLink to="/login">
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </NavLink>
+          <div className="tooltip"> Login</div>
+        </div>
 
         <h3>Register</h3>
         <div className="">
@@ -172,7 +172,7 @@ const Register = () => {
         isOpen={modalIsOpen}
         closeModal={() => {
           setModalIsOpen(false);
-          window.location.reload();
+          navigate("/login");
         }}
       />
     </>

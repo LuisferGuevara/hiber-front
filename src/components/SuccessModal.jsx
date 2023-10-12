@@ -5,7 +5,6 @@ import "../styles/Modal.scss";
 const SuccessModal = ({ isOpen, closeModal }) => {
   const handleCloseModal = () => {
     closeModal();
-    window.location.reload();
   };
 
   if (!isOpen) {

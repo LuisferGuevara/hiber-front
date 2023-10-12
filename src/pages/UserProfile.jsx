@@ -8,7 +8,7 @@ const UserProfile = () => {
 
   return (
     <div className="main-container">
-      <Navbar/>
+      <Navbar />
       <h3>Mi Perfil</h3>
       <UserCard user={user} />
     </div>
